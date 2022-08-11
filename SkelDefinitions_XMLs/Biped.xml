@@ -1,0 +1,176 @@
+<config_root>
+    <match_list>
+        <item key="Reference" value=""/>
+        <item key="Hips" value="" use_root="true"/>
+        <item key="LeftUpLeg" value="L Thigh"/>
+        <item key="LeftLeg" value="L Calf"/>
+        <item key="LeftFoot" value="L Foot"/>
+        <item key="RightUpLeg" value="R Thigh"/>
+        <item key="RightLeg" value="R Calf"/>
+        <item key="RightFoot" value="R Foot"/>
+        <item key="Spine" value="Spine"/>
+        <item key="LeftArm" value="L UpperArm"/>
+        <item key="LeftForeArm" value="L Forearm"/>
+        <item key="LeftHand" value="L Hand"/>
+        <item key="RightArm" value="R UpperArm"/>
+        <item key="RightForeArm" value="R Forearm"/>
+        <item key="RightHand" value="R Hand"/>
+        <item key="Head" value="Head"/>
+        <item key="LeftToeBase" value=""/>
+        <item key="RightToeBase" value=""/>
+        <item key="LeftShoulder" value="L Clavicle"/>
+        <item key="RightShoulder" value="R Clavicle"/>
+        <item key="Neck" value="Neck"/>
+        <item key="LeftFingerBase" value=""/>
+        <item key="RightFingerBase" value=""/>
+        <item key="Spine1" value="Spine1"/>
+        <item key="Spine2" value="Spine2"/>
+        <item key="Spine3" value="Spine3"/>
+        <item key="Spine4" value="Spine4"/>
+        <item key="Spine5" value="Spine5"/>
+        <item key="Spine6" value="Spine6"/>
+        <item key="Spine7" value="Spine7"/>
+        <item key="Spine8" value="Spine8"/>
+        <item key="Spine9" value="Spine9"/>
+        <item key="Neck1" value="Neck1"/>
+        <item key="Neck2" value="Neck2"/>
+        <item key="Neck3" value="Neck3"/>
+        <item key="Neck4" value="Neck4"/>
+        <item key="Neck5" value="Neck5"/>
+        <item key="Neck6" value="Neck6"/>
+        <item key="Neck7" value="Neck7"/>
+        <item key="Neck8" value="Neck8"/>
+        <item key="Neck9" value="Neck9"/>
+        <item key="LeftUpLegRoll" value="LThighTwist"/>
+        <item key="LeftLegRoll" value="LCalfTwist"/>
+        <item key="RightUpLegRoll" value="RThighTwist"/>
+        <item key="RightLegRoll" value="RCalfTwist"/>
+        <item key="LeftArmRoll" value="LUpArmTwist"/>
+        <item key="LeftForeArmRoll" value="L ForeTwist"/>
+        <item key="RightArmRoll" value="RUpArmTwist"/>
+        <item key="RightForeArmRoll" value="R ForeTwist"/>
+        <item key="HipsTranslation" value=""/>
+        <item key="LeftHandThumb1" value="L Finger0"/>
+        <item key="LeftHandThumb2" value="L Finger01"/>
+        <item key="LeftHandThumb3" value="L Finger02"/>
+        <item key="LeftHandThumb4" value=""/>
+        <item key="LeftHandIndex1" value="L Finger1"/>
+        <item key="LeftHandIndex2" value="L Finger11"/>
+        <item key="LeftHandIndex3" value="L Finger12"/>
+        <item key="LeftHandIndex4" value=""/>
+        <item key="LeftHandMiddle1" value="L Finger2"/>
+        <item key="LeftHandMiddle2" value="L Finger21"/>
+        <item key="LeftHandMiddle3" value="L Finger22"/>
+        <item key="LeftHandMiddle4" value=""/>
+        <item key="LeftHandRing1" value="L Finger3"/>
+        <item key="LeftHandRing2" value="L Finger31"/>
+        <item key="LeftHandRing3" value="L Finger32"/>
+        <item key="LeftHandRing4" value=""/>
+        <item key="LeftHandPinky1" value="L Finger4"/>
+        <item key="LeftHandPinky2" value="L Finger41"/>
+        <item key="LeftHandPinky3" value="L Finger42"/>
+        <item key="LeftHandPinky4" value=""/>
+        <item key="LeftHandExtraFinger1" value=""/>
+        <item key="LeftHandExtraFinger2" value=""/>
+        <item key="LeftHandExtraFinger3" value=""/>
+        <item key="LeftHandExtraFinger4" value=""/>
+        <item key="RightHandThumb1" value="R Finger0"/>
+        <item key="RightHandThumb2" value="R Finger01"/>
+        <item key="RightHandThumb3" value="R Finger02"/>
+        <item key="RightHandThumb4" value=""/>
+        <item key="RightHandIndex1" value="R Finger1"/>
+        <item key="RightHandIndex2" value="R Finger11"/>
+        <item key="RightHandIndex3" value="R Finger12"/>
+        <item key="RightHandIndex4" value=""/>
+        <item key="RightHandMiddle1" value="R Finger2"/>
+        <item key="RightHandMiddle2" value="R Finger21"/>
+        <item key="RightHandMiddle3" value="R Finger22"/>
+        <item key="RightHandMiddle4" value=""/>
+        <item key="RightHandRing1" value="R Finger3"/>
+        <item key="RightHandRing2" value="R Finger31"/>
+        <item key="RightHandRing3" value="R Finger32"/>
+        <item key="RightHandRing4" value=""/>
+        <item key="RightHandPinky1" value="R Finger4"/>
+        <item key="RightHandPinky2" value="R Finger41"/>
+        <item key="RightHandPinky3" value="R Finger42"/>
+        <item key="RightHandPinky4" value=""/>
+        <item key="RightHandExtraFinger1" value=""/>
+        <item key="RightHandExtraFinger2" value=""/>
+        <item key="RightHandExtraFinger3" value=""/>
+        <item key="RightHandExtraFinger4" value=""/>
+        <item key="LeftFootThumb1" value="L Toe4"/>
+        <item key="LeftFootThumb2" value="L Toe41"/>
+        <item key="LeftFootThumb3" value="L Toe42"/>
+        <item key="LeftFootThumb4" value=""/>
+        <item key="LeftFootIndex1" value="L Toe3"/>
+        <item key="LeftFootIndex2" value="L Toe31"/>
+        <item key="LeftFootIndex3" value="L Toe32"/>
+        <item key="LeftFootIndex4" value=""/>
+        <item key="LeftFootMiddle1" value="L Toe2"/>
+        <item key="LeftFootMiddle2" value="L Toe21"/>
+        <item key="LeftFootMiddle3" value="L Toe22"/>
+        <item key="LeftFootMiddle4" value=""/>
+        <item key="LeftFootRing1" value="L Toe1"/>
+        <item key="LeftFootRing2" value="L Toe11"/>
+        <item key="LeftFootRing3" value="L Toe12"/>
+        <item key="LeftFootRing4" value=""/>
+        <item key="LeftFootPinky1" value="L Toe0"/>
+        <item key="LeftFootPinky2" value="L Toe01"/>
+        <item key="LeftFootPinky3" value="L Toe02"/>
+        <item key="LeftFootPinky4" value=""/>
+        <item key="LeftFootExtraFinger1" value=""/>
+        <item key="LeftFootExtraFinger2" value=""/>
+        <item key="LeftFootExtraFinger3" value=""/>
+        <item key="LeftFootExtraFinger4" value=""/>
+        <item key="RightFootThumb1" value="R Toe4"/>
+        <item key="RightFootThumb2" value="R Toe41"/>
+        <item key="RightFootThumb3" value="R Toe42"/>
+        <item key="RightFootThumb4" value=""/>
+        <item key="RightFootIndex1" value="R Toe3"/>
+        <item key="RightFootIndex2" value="R Toe31"/>
+        <item key="RightFootIndex3" value="R Toe32"/>
+        <item key="RightFootIndex4" value=""/>
+        <item key="RightFootMiddle1" value="R Toe2"/>
+        <item key="RightFootMiddle2" value="R Toe21"/>
+        <item key="RightFootMiddle3" value="R Toe22"/>
+        <item key="RightFootMiddle4" value=""/>
+        <item key="RightFootRing1" value="R Toe1"/>
+        <item key="RightFootRing2" value="R Toe11"/>
+        <item key="RightFootRing3" value="R Toe12"/>
+        <item key="RightFootRing4" value=""/>
+        <item key="RightFootPinky1" value="R Toe0"/>
+        <item key="RightFootPinky2" value="R Toe01"/>
+        <item key="RightFootPinky3" value="R Toe02"/>
+        <item key="RightFootPinky4" value=""/>
+        <item key="RightFootExtraFinger1" value=""/>
+        <item key="RightFootExtraFinger2" value=""/>
+        <item key="RightFootExtraFinger3" value=""/>
+        <item key="RightFootExtraFinger4" value=""/>
+        <item key="LeftInHandThumb" value=""/>
+        <item key="LeftInHandIndex" value=""/>
+        <item key="LeftInHandMiddle" value=""/>
+        <item key="LeftInHandRing" value=""/>
+        <item key="LeftInHandPinky" value=""/>
+        <item key="LeftInHandExtraFinger" value=""/>
+        <item key="RightInHandThumb" value=""/>
+        <item key="RightInHandIndex" value=""/>
+        <item key="RightInHandMiddle" value=""/>
+        <item key="RightInHandRing" value=""/>
+        <item key="RightInHandPinky" value=""/>
+        <item key="RightInHandExtraFinger" value=""/>
+        <item key="LeftInFootThumb" value=""/>
+        <item key="LeftInFootIndex" value=""/>
+        <item key="LeftInFootMiddle" value=""/>
+        <item key="LeftInFootRing" value=""/>
+        <item key="LeftInFootPinky" value=""/>
+        <item key="LeftInFootExtraFinger" value=""/>
+        <item key="RightInFootThumb" value=""/>
+        <item key="RightInFootIndex" value=""/>
+        <item key="RightInFootMiddle" value=""/>
+        <item key="RightInFootRing" value=""/>
+        <item key="RightInFootPinky" value=""/>
+        <item key="RightInFootExtraFinger" value=""/>
+        <item key="LeftShoulderExtra" value=""/>
+        <item key="RightShoulderExtra" value=""/>
+    </match_list>
+</config_root>
