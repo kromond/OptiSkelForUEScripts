@@ -6,7 +6,7 @@ import maya.cmds as cmds
 
 rootDir = cmds.workspace( q=True, rd=True )
 scriptDir = rootDir + 'scripts/'
-jsonDir = rootDir + 'scripts/jsonPoses'
+jsonDir = rootDir + 'scripts/jsonPoses/'
 jsonDirs = rootDir + 'scripts/jsonPoses/{0}.json'
 
 
@@ -40,13 +40,13 @@ def readInJSONPose(poseFilePath, newPose='OptiNoNS_APose', NS=None):
     if jsonPose.exists():
        poseData = json.load(open(jsonPose))
        
-       for j,v in poseData.iteritems():
-           for c, vals in v.iteritems():
-               print("{0}:{1}".format(c,vals)) 
+       for j,v in poseData.items():
+           for c, vals in v.items():
+               print("{0}_{1}".format(c,vals)) 
                if NS==None:
                    j = pm.PyNode(j)
                else:
-                   j = pm.PyNode("{0}:{1}".format(NS,j))
+                   j = pm.PyNode("{0}_{1}".format(NS,j))
                try:
                    j.attr(c).set(vals)
                except:
