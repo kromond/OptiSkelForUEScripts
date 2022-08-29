@@ -19,5 +19,5 @@ Set your maya project at your desired directory and create project windows, put 
 
 Make sure your skeleton's naming convention follows this pattern: `NameSpace_JointName`. Example: Jane_Root
 
-Select your skeleton hierarchy and run `OptiSkel_to_SKM.py` to get a T-Pose skeletal mesh.
+Select your skeleton hierarchy and run `serializeJSONPoses.py` then `OptiSkel_to_SKM.py` to get a A-Pose skeletal mesh that is in the same pose as UE Metahuman.
 
