@@ -2,6 +2,13 @@ import pymel.core as pm
 import json
 from collections import OrderedDict
 from pymel.core import Path
+import maya.cmds as cmds
+
+rootDir = cmds.workspace( q=True, rd=True )
+scriptDir = rootDir + 'scripts/'
+jsonDir = rootDir + 'scripts/jsonPoses'
+jsonDirs = rootDir + 'scripts/jsonPoses/{0}.json'
+
 
 def writeOutJSONPose(joints, poseName):
     joints = sorted(joints)
@@ -16,7 +23,7 @@ def writeOutJSONPose(joints, poseName):
         
     #print(json.dumps(poseDict, indent=4))
     
-    poseFilePath = r"\\vuwstocoissrin1.vuw.ac.nz\SODI_RapidMedia_01\Software\pipeline\python\Maya\jsonPoses\{0}.json".format(poseName)
+    poseFilePath = jsonDirs.format(poseName)
     
     with open(poseFilePath, 'w') as p:
         json.dump(poseDict, p, indent=4)

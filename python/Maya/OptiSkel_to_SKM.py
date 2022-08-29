@@ -1,4 +1,10 @@
+import sys
 import maya.cmds as cmds
+rootDir = cmds.workspace( q=True, rd=True )
+scriptDir = rootDir + 'scripts/'
+if scriptDir not in sys.path:
+    sys.path.append(scriptDir)
+
 from math import sqrt,pow
 import random
 import serializeJSONPoses as sp
@@ -6,7 +12,7 @@ import serializeJSONPoses as sp
 def addNamespaceToStrings(inputList, NS):
     outlist = []
     for each in inputList:
-        outlist.append("{0}:{1}".format(NS,each))
+        outlist.append("{0}_{1}".format(NS,each))
     return outlist
             
 def create_shader(name, node_type="lambert"):
@@ -16,7 +22,7 @@ def create_shader(name, node_type="lambert"):
     return material, sg
 
 # get namespace for selected
-NS = cmds.ls(sl=True)[0].split(':')[0]
+NS = cmds.ls(sl=True)[0].split('_')[0]
 
 # get joints for selected root
 joints =  cmds.ls(sl=True, type="joint", dag=True, ap=True)
@@ -25,8 +31,8 @@ joints =  cmds.ls(sl=True, type="joint", dag=True, ap=True)
 for j in joints:
     cmds.setAttr(j + '.rotate', 0,0,0, type="double3")
 # set tx and tz to zero on hips
-cmds.setAttr(NS + ":" + 'Hips.translateX', 0)
-cmds.setAttr(NS + ":" + 'Hips.translateZ', 0)
+cmds.setAttr(NS + "_" + 'Hips.translateX', 0)
+cmds.setAttr(NS + "_" + 'Hips.translateZ', 0)
 
 # make some materials with random colors
 spheresMat, sphSG = create_shader("SpheresMat")    
@@ -105,7 +111,7 @@ for i,j in enumerate(joints):
             cmds.delete(geo,constructionHistory=True)
             
 # read in the stored A pose from the other retarget effort
-poseFilePath = Path(r"\\vuwstocoissrin1.vuw.ac.nz\SODI_RapidMedia_01\Software\pipeline\python\Maya\jsonPoses")
+poseFilePath = Path(jsonDir)
 sp.readInJSONPose(poseFilePath, 'OptiNoNS_APose', NS)
 
 # save a bindPose
