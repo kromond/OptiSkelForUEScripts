@@ -2,6 +2,13 @@ import pymel.core as pm
 import json
 from collections import OrderedDict
 from pymel.core import Path
+import maya.cmds as cmds
+
+rootDir = cmds.workspace( q=True, rd=True )
+scriptDir = rootDir + 'scripts/'
+jsonDir = rootDir + 'scripts/jsonPoses/'
+jsonDirs = rootDir + 'scripts/jsonPoses/{0}.json'
+
 
 def writeOutJSONPose(joints, poseName):
     joints = sorted(joints)
@@ -16,7 +23,7 @@ def writeOutJSONPose(joints, poseName):
         
     #print(json.dumps(poseDict, indent=4))
     
-    poseFilePath = r"\\vuwstocoissrin1.vuw.ac.nz\SODI_RapidMedia_01\Software\pipeline\python\Maya\jsonPoses\{0}.json".format(poseName)
+    poseFilePath = jsonDirs.format(poseName)
     
     with open(poseFilePath, 'w') as p:
         json.dump(poseDict, p, indent=4)
@@ -33,13 +40,13 @@ def readInJSONPose(poseFilePath, newPose='OptiNoNS_APose', NS=None):
     if jsonPose.exists():
        poseData = json.load(open(jsonPose))
        
-       for j,v in poseData.iteritems():
-           for c, vals in v.iteritems():
-               print("{0}:{1}".format(c,vals)) 
+       for j,v in poseData.items():
+           for c, vals in v.items():
+               print("{0}_{1}".format(c,vals)) 
                if NS==None:
                    j = pm.PyNode(j)
                else:
-                   j = pm.PyNode("{0}:{1}".format(NS,j))
+                   j = pm.PyNode("{0}_{1}".format(NS,j))
                try:
                    j.attr(c).set(vals)
                except:
