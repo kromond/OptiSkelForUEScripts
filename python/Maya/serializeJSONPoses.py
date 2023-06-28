@@ -10,7 +10,7 @@ jsonDir = rootDir + 'scripts/jsonPoses/'
 jsonDirs = rootDir + 'scripts/jsonPoses/{0}.json'
 
 
-def writeOutJSONPose(joints, poseName):
+def writeOutJSONPose(poseFilePath, joints, poseName):
     joints = sorted(joints)
     
     poseDict = OrderedDict()
@@ -22,10 +22,8 @@ def writeOutJSONPose(joints, poseName):
         poseDict[jnt.nodeName()] = {'r':r}
         
     #print(json.dumps(poseDict, indent=4))
-    
-    poseFilePath = jsonDirs.format(poseName)
-    
-    with open(poseFilePath, 'w') as p:
+        
+    with open("{0}/{1}.json".format(poseFilePath, poseName), 'w') as p:
         json.dump(poseDict, p, indent=4)
 
 #get all the joints below the selected
@@ -54,5 +52,7 @@ def readInJSONPose(poseFilePath, newPose='OptiNoNS_APose', NS=None):
     else:
         print("Did not find {0] in the path: {1}".format(newPose, poseFilePath))
 
-#poseFilePath = Path(r"\\vuwstocoissrin1.vuw.ac.nz\SODI_RapidMedia_01\SetupAssets\Maya\jsonPoses")
-#readinJSONPose(poseFilePath, 'OptiNoNS_APose')
+poseFilePath = Path(r"\\vuwstocoissrin1.vuw.ac.nz\SODI_RapidMedia_01\Software\OptiSkelForUEScripts\python\Maya\jsonPoses")
+readInJSONPose(poseFilePath, 'BinArmsTPose')
+joints = pm.ls(sl=True,type='joint', dag=True, ap=True)
+writeOutJSONPose(poseFilePath, joints, "BinArmsTPose")
