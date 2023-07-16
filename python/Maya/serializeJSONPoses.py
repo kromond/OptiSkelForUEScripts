@@ -3,6 +3,8 @@ import json
 from collections import OrderedDict
 from pymel.core import Path
 import maya.cmds as cmds
+import glob
+from pathlib import Path
 
 rootDir = cmds.workspace( q=True, rd=True )
 scriptDir = rootDir + 'scripts/'
@@ -32,14 +34,19 @@ def writeOutJSONPose(poseFilePath, joints, poseName):
 
 
 def readInJSONPose(poseFilePath, newPose='OptiNoNS_APose', NS=None):
-    jsons = poseFilePath.glob("*.json")
+    jsons = glob.glob("{}/*.json".format(poseFilePath))
     
-    jsonPose = [p for p in jsons if newPose in p][0]
+    jsonPose = Path([p for p in jsons if newPose in p][0])
+    print("Json pose: {} found".format(jsonPose))
     if jsonPose.exists():
        poseData = json.load(open(jsonPose))
        
        for j,v in poseData.items():
-           for c, vals in v.items():
+            # Check if the joint exist
+            if not cmds.objExists(j):
+                print("Root joint '{}' does not exist.".format(j))
+                continue
+            for c, vals in v.items():
                print("{0}_{1}".format(c,vals)) 
                if NS==None:
                    j = pm.PyNode(j)
@@ -52,7 +59,7 @@ def readInJSONPose(poseFilePath, newPose='OptiNoNS_APose', NS=None):
     else:
         print("Did not find {0] in the path: {1}".format(newPose, poseFilePath))
 
-poseFilePath = Path(r"\\vuwstocoissrin1.vuw.ac.nz\SODI_RapidMedia_01\Software\OptiSkelForUEScripts\python\Maya\jsonPoses")
-readInJSONPose(poseFilePath, 'BinArmsTPose')
-joints = pm.ls(sl=True,type='joint', dag=True, ap=True)
-writeOutJSONPose(poseFilePath, joints, "BinArmsTPose")
+# poseFilePath = Path(r"\\vuwstocoissrin1.vuw.ac.nz\SODI_RapidMedia_01\Software\OptiSkelForUEScripts\python\Maya\jsonPoses")
+# readInJSONPose(poseFilePath, 'BinArmsTPose')
+# joints = pm.ls(sl=True,type='joint', dag=True, ap=True)
+# writeOutJSONPose(poseFilePath, joints, "BinArmsTPose")
