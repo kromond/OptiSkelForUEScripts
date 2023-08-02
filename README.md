@@ -14,7 +14,8 @@ Set your maya project at your desired directory and create project windows, put 
     + scnenes
     + scripts
         + jsonPoses
-        + OptiSkel_to_SKM.py
+        + OptiSkelBuildStickGeo.py
+        + OptiSkelPrep.py
         + serializeJSONPoses.py
     + sound
     + ...
@@ -37,3 +38,5 @@ If you exported with the new 'sticks' option, you will have a mesh at the root o
 The script now poses the skeleton into a perfect A Pose which will make retargeting much nicer
 
 NOTE: only tested with Maya 2022.4 
+
+![image](https://github.com/kromond/OptiSkelForUEScripts/assets/5624947/88c7bd80-aa1e-41a3-afd8-61c031e4e16e)
