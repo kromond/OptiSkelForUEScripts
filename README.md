@@ -19,8 +19,7 @@ Set your maya project at your desired directory and create project windows, put 
     + sound
     + ...
 
-or put them anywhere in your Maya script path
-or do like I do and put them anywhere and update your Maya script path like this:
+or do like I do and put them anywhere and update your Maya script path like this in the maya script editor right at the start:
 import sys
 ```
 from pathlib import Path
@@ -32,8 +31,8 @@ if scriptDir not in sys.path:
 
 The script is updated to take an FBX exported with a *single skeleton* with either a ":" or "_" for the name separator.  There is a variable to control this
 
-If you exported with the new 'sticks' option, you will have a mesh at the root of the skeleton hirearchy and joints under this.  UE can read this in and use it, but you can Live Link stream on to this because in UE you will see there is no bone named 'Root'.  This script can fix this
+If you exported an FBX from Motive with the new 'sticks' option, you will have a mesh at the root of the skeleton hirearchy and joints under this.  UE can read this in and use it, but you can not Live Link stream on to this because in UE you will see there is no bone named 'Root'.  This script can fix this by adding a root bone and renaming the mesh
 
 The script now poses the skeleton into a perfect A Pose which will make retargeting much nicer
 
-NOTE: only tested with Maya 2022.4 
+NOTE: only tested with Maya 2022.4 and UE 5.2
