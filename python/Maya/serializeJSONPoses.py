@@ -50,9 +50,6 @@ def read_in_JSON_pose(pose_file_path, new_pose='OptiNoNS_APose', NS=None, name_s
                     try:
                         print("j: {0}, c: {1}, vals: {2}".format(j,c,vals))                        
                         j.attr(c).set(vals)
-                        # else:
-                        #     print("Failed to Pose Joint '{0}' /n {0} does not exist in the scene file.".format(j))
-                        #     continue
                     except:
                         print("{0}  !! this item failed to pose for some reason".format(j))
     else:

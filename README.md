@@ -36,10 +36,6 @@ If you exported an FBX from Motive with the new 'sticks' option, you will have a
 
 The script now poses the skeleton into a perfect A Pose which will make retargeting much nicer
 
-<<<<<<< HEAD
-NOTE: only tested with Maya 2022.4 and UE 5.2
-=======
 NOTE: only tested with Maya 2022.4 
 
 ![image](https://github.com/kromond/OptiSkelForUEScripts/assets/5624947/88c7bd80-aa1e-41a3-afd8-61c031e4e16e)
->>>>>>> 09481c1542705fa80c156743172cf4f6756d46b4

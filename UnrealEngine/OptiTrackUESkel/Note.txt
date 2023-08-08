@@ -1,0 +1,9 @@
+This uasset is an editor utility widget for Unreal 5.2
+
+Right click and run to load a ui for running the python scripts in the python folder here:
+OptiSkelForUEScripts\python\Unreal Engine
+
+Those scripts are expected in your project.  Copy them here: 
+<yourProject>\Content\Python\
+
+the fbx file is a simple ball and stick skeleton with Motive bone names.  For live link you can easily stream on to this skel and retarget from that 

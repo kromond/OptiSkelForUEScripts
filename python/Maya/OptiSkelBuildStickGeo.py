@@ -27,13 +27,6 @@ def build_skeleton_from_selected(root_joint, namespace_token):
     # get joints for selected root
     joints =  cmds.ls(root_joint, type="joint", dag=True, ap=True)
 
-    # # set all rotations to zeros
-    # for j in joints:
-    #     cmds.setAttr(j + '.rotate', 0,0,0, type="double3")
-    # # set tx and tz to zero on hips
-    # cmds.setAttr(NS + namespace_token + 'Hips.translateX', 0)
-    # cmds.setAttr(NS + namespace_token + 'Hips.translateZ', 0)
-
     # make some materials with random colors
     spheres_mat, sph_SG = create_shader("SpheresMat")    
     sticks_mat, st_SG = create_shader("SticksMat")
