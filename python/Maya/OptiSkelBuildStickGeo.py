@@ -56,23 +56,28 @@ def build_skeleton_from_selected(root_joint, namespace_token):
         c = cmds.listRelatives(joint, children=1) # get the childrent of this joint
         if c:
             for each in c:
+                if 'Root' in joint:
+                    # don't make any geo for the root joint
+                    continue 
                 geo = ''
                 # get a distance to parent
                 p2 = cmds.xform(each,q=1,ws=1,t=1)
                 dist = sqrt(pow(p1[0]-p2[0],2)+pow(p1[1]-p2[1],2)+pow(p1[2]-p2[2],2))
                 pplane = cmds.polyPlane(axis=[-1,0,0],w=3,h=3,sx=1,sy=1, constructionHistory=False)[0] # make a plane at the child joint
+                
                 geo = cmds.rename(pplane, joint+"_geo")
                 #if geo in scalep5:
                 #    cmds.scale(1,.5,.5, geo)
                 if geo in scalep2 or geo in scalep5:
-                    cmds.scale(1,.2,.2, geo)            
+                    cmds.scale(1,.2,.2, geo)  
+
                 cmds.polyExtrudeFacet(geo, ltz=-dist, lsx=0,lsy=0,lsz=0) #extrude this to the parent
                 cmds.xform(geo, piv=[0,0,0], ws=1, a=1)
                 cmds.select(geo, r=1)
                 cmds.sets(geo, forceElement=st_SG)
                 
                 # spheres
-                noSpheresList = add_namespace_to_strings(["RightUpLeg", "LeftUpLeg","RightHandIndex1","RightHandThumb1","RightHandRing1","RightHandPinky1", 
+                noSpheresList = add_namespace_to_strings(["Root", "RightUpLeg", "LeftUpLeg","RightHandIndex1","RightHandThumb1","RightHandRing1","RightHandPinky1", 
                     "LeftHandIndex1","LeftHandThumb1","LeftHandRing1","LeftHandPinky1", "LeftShoulder", "RightShoulder"],NS, namespace_token)
                 if each in noSpheresList:
                     # joints with more than one children should only get one sphere
@@ -104,29 +109,29 @@ def build_skeleton_from_selected(root_joint, namespace_token):
                 if each not in noSpheresList:
                     # some geos are sharing spheres
                     sph = cmds.parent(sph, world=True)
-                    cmds.skinCluster(sph, joint, bindMethod=0, normalizeWeights=0)
+                    cmds.skinCluster( joint, sph, maximumInfluences=1, toSelectedBones=True, bindMethod=0, skinMethod=0, normalizeWeights=1)
                     sphere_list.append(sph[0])
-                cmds.skinCluster(geo, joint, bindMethod=0, normalizeWeights=0)
+                cmds.skinCluster( joint, each, geo, maximumInfluences=2, toSelectedBones=True, bindMethod=0, skinMethod=0, dropoffRate=10, normalizeWeights=0)
                 geolist = stick_list.append(geo[0])
 
     # now duplicate all this new geo, merge it, bind the merged geo and copy over the weights
     merged_list = [x for x in sphere_list] + [x for x in stick_list]
-    dupes = cmds.duplicate(merged_list)
-    combined_mesh = cmds.polyUnite(dupes, name="combinedMesh", ch=False)[0]
-    cmds.delete(dupes) # delete the left over transform
+    # dupes = cmds.duplicate(merged_list)
+    cmds.polyUniteSkinned(merged_list, ch=False)[0]
+    # cmds.delete(dupes) # delete the left over transform
     # bind this combined mesh to get a skin cluster
-    cmds.skinCluster(combined_mesh, root_joint)
+    #cmds.skinCluster(combined_mesh, root_joint)
     # Combine the skin weights from all the separate meshes onto the combined mesh
-    for geo1 in merged_list:
-        skin_cluster = cmds.ls(cmds.listHistory(geo1), type='skinCluster')
-        if not skin_cluster:
-            print(f"No skinCluster found for {geo1}. Skipping...")
-            continue
-        cmds.skinPercent(skin_cluster[0], geo1, nrm=True, transform=combined_mesh)
-    cmds.delete(merged_list)
+    # for geo1 in merged_list:
+    #     skin_cluster = cmds.ls(cmds.listHistory(geo1), type='skinCluster')
+    #     if not skin_cluster:
+    #         print(f"No skinCluster found for {geo1}. Skipping...")
+    #         continue
+    #     cmds.skinPercent(skin_cluster[0], geo1, nrm=True, transform=combined_mesh)
+    # cmds.delete(merged_list)
     # save a bindPose
     # cmds.select(joints, replace=True)
     # cmds.dagPose(n='bindPose', s=True)
-    return combined_mesh
+    # return combined_mesh
 
 
