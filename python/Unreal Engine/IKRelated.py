@@ -43,6 +43,7 @@ def makeIKRFromSKM(skm):
     spine_setting.rotation_stiffness = 1
     spine1_setting = ikr_controller.get_bone_settings("Spine1", 0)
     spine1_setting.rotation_stiffness = 1
+    # other bone settings
     LeftShoulder_setting = ikr_controller.get_bone_settings("LeftShoulder", 0)
     LeftShoulder_setting.rotation_stiffness = 1
     RightShoulder_setting = ikr_controller.get_bone_settings("RightShoulder", 0)
@@ -52,18 +53,18 @@ def makeIKRFromSKM(skm):
     LeftForeArm_setting.preferred_angles = unreal.Vector(0,0,90)
     RightForeArm_setting = ikr_controller.get_bone_settings("RightForeArm", 0)
     RightForeArm_setting.use_preferred_angles  = True
-    RightForeArm_setting.preferred_angles = unreal.Vector(0,0,90)
+    RightForeArm_setting.preferred_angles = unreal.Vector(0,90,0)
     LeftLeg_setting = ikr_controller.get_bone_settings("LeftLeg", 0)
     LeftLeg_setting.use_preferred_angles  = True
-    LeftLeg_setting.preferred_angles = unreal.Vector(90,0,0)
+    LeftLeg_setting.preferred_angles = unreal.Vector(0,-90,0)
     RightLeg_setting = ikr_controller.get_bone_settings("RightLeg", 0)
     RightLeg_setting.use_preferred_angles  = True
-    RightLeg_setting.preferred_angles = unreal.Vector(90,0,0)    
+    RightLeg_setting.preferred_angles = unreal.Vector(0,-90,0)    
 
     # set these fbik attributes
     fbik = ikr_controller.get_solver_at_index(fbik_index)
     fbik.root_behavior=unreal.PBIKRootBehavior.PRE_PULL
-    fbik.allow_stretch=True
+    # fbik.allow_stretch=True
 
     # set the root bone of the solver
     ikr_controller.set_root_bone("Hips", 0)
@@ -130,20 +131,20 @@ def makeRTGForManny(ikr_source, ikr_target):
     # rtg_controller.set_current_retarget_pose("T_Pose", unreal.RetargetSourceOrTarget.TARGET)
 
     # set foot IK blend to source to 1, blend source weights 0, 0, 1 & extension to 1.01
-    left_leg_chain_settings = rtg_controller.get_retarget_chain_settings("LeftLeg")
-    left_leg_chain_settings.ik.blend_to_source = 1
-    print(left_leg_chain_settings.ik.blend_to_source)
-    left_leg_chain_settings.ik.blend_to_source_weights = unreal.Vector(0,0,1)
-    left_leg_chain_settings.ik.extension=1.01
-    print(left_leg_chain_settings.ik.blend_to_source_weights)
-    right_leg_chain_settings = rtg_controller.get_retarget_chain_settings("RightLeg")
-    right_leg_chain_settings.ik.blend_to_source = 1
-    right_leg_chain_settings.ik.blend_to_source_weights = unreal.Vector(0,0,1)
-    right_leg_chain_settings.ik.extension=1.01
+    # left_leg_chain_settings = rtg_controller.get_retarget_chain_settings("LeftLeg")
+    # left_leg_chain_settings.ik.blend_to_source = 1
+    # print(left_leg_chain_settings.ik.blend_to_source)
+    # left_leg_chain_settings.ik.blend_to_source_weights = unreal.Vector(0,0,1)
+    # left_leg_chain_settings.ik.extension=1.01
+    # print(left_leg_chain_settings.ik.blend_to_source_weights)
+    # right_leg_chain_settings = rtg_controller.get_retarget_chain_settings("RightLeg")
+    # right_leg_chain_settings.ik.blend_to_source = 1
+    # right_leg_chain_settings.ik.blend_to_source_weights = unreal.Vector(0,0,1)
+    # right_leg_chain_settings.ik.extension=1.01
 
     # rotate the root bone -90 on the default pose for the TARGET
     # this is because the Optitrack Motive skeleton is +X fwd
-    
+
     rotation_offset = unreal.Rotator()
     rotation_offset.yaw = -90
     rtg_controller.set_rotation_offset_for_retarget_pose_bone("root", rotation_offset.quaternion(), unreal.RetargetSourceOrTarget.TARGET)

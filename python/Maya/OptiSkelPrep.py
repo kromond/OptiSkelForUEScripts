@@ -238,7 +238,7 @@ import imp
 from pathlib import Path
 scriptDir = Path("//path_to_where_you_saved_this/OptiSkelForUEScripts/python/Maya/")
 if scriptDir not in sys.path:
-    sys.path.append(scriptDir)
+    sys.path.append(scriptDir.as_posix())
 
 import OptiSkelPrep as osp
 imp.reload(osp)
