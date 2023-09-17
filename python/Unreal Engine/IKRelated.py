@@ -3,7 +3,7 @@ import unreal
 # All this is to work with the Optitrack Skeleton, with a root bone and force front x 
 
 def makeIKRFromSKM(skm):
-    #get the name of this skm, and the path.  This is where we will put the rig
+    # Get the name of this skm, and the path.  This is where we will put the rig
     fname = unreal.EditorAssetLibrary.get_fname(skm)
     fpath = unreal.EditorAssetLibrary.get_path_name(skm).split(".")[0].replace(str(fname),"")
     print("Name: {0}, Path: {1}".format(fname, fpath))
@@ -11,8 +11,8 @@ def makeIKRFromSKM(skm):
     # ikr = unreal.load_asset(name = '/Game/Characters/Mannequins/Rigs/IK_Mannequin', outer = None)
 
     # Get the asset tools.
-
     asset_tools = unreal.AssetToolsHelpers.get_asset_tools()
+    
     # Create an IK Rig in the location defined by the file path. For example: ` …/Game/IK_Mannequin`.
     ikr = asset_tools.create_asset(asset_name='IKR_{0}'.format(fname),
         package_path=fpath, asset_class=unreal.IKRigDefinition,
@@ -22,7 +22,6 @@ def makeIKRFromSKM(skm):
     ikr_controller = unreal.IKRigController.get_controller(ikr)
     ikr_controller.set_skeletal_mesh(skm)
     fbik_index = ikr_controller.add_solver(unreal.IKRigFBIKSolver)
-
 
     ikr_controller.add_new_goal("hand_l_goal", "LeftHand")
     ikr_controller.add_new_goal("hand_r_goal", "RightHand")
@@ -94,28 +93,33 @@ def makeIKRFromSKM(skm):
     ikr_controller.add_retarget_chain("RightRing", "RightHandRing1", "RightHandRing3","")
     ikr_controller.add_retarget_chain("RightPinky", "RightHandPinky1", "RightHandPinky3", "")
  
-    # save asset
+    # Save asset
     unreal.EditorAssetLibrary.save_asset(ikr.get_path_name())
     return ikr
 
 def makeRTGForManny(ikr_source, ikr_target):
-    #get the name of this skm, and the path.  This is where we will put the rig
+    
+    # Get the name of this skm, and the path.  This is where we will put the rig
     fname = unreal.EditorAssetLibrary.get_fname(ikr_source)
     fpath = unreal.EditorAssetLibrary.get_path_name(ikr_source).split(".")[0].replace(str(fname),"")
-    print("Name: {0}, Path: {1}".format(fname, fpath))
+    # print("Name: {0}, Path: {1}".format(fname, fpath))
 
     asset_tools = unreal.AssetToolsHelpers.get_asset_tools()
+
     # Create an IK Retargeter asset in the location defined by the file path. For example, `.../Game/RTG_Mannequin`.
     rtg = asset_tools.create_asset(asset_name='RTG_{0}'.format(fname), package_path=fpath, asset_class=unreal.IKRetargeter, factory=unreal.IKRetargetFactory())
-    # get the IK Retargeter controller
+    
+    # Get the IK Retargeter controller
     rtg_controller = unreal.IKRetargeterController.get_controller(rtg)
+    
     # Load the Source and Target IK Rigs. 
     rtg_controller.set_ik_rig(unreal.RetargetSourceOrTarget.SOURCE, ikr_source)
     rtg_controller.set_ik_rig(unreal.RetargetSourceOrTarget.TARGET, ikr_target)
 
     # Map chains using a fuzzy string match, which will force a remap.
     rtg_controller.auto_map_chains(unreal.AutoMapChainType.FUZZY, True)
-    # All of these will get NONE
+    
+    # All of these will get NONE because they are not in the source, only the target 
     noneList = ["LeftLowerArmTwist01", "LeftLowerArmTwist02", "LeftIndexMetacarpal", "LeftMiddleMetacarpal","LeftRingMetacarpal",
                 "LeftPinkyMetacarpal", "LeftUpperArmTwist01","LeftUpperArmTwist02","RightLowerArmTwist01", "RightLowerArmTwist02", 
                 "RightIndexMetacarpal", "RightMiddleMetacarpal","RightRingMetacarpal", "RightPinkyMetacarpal", 
@@ -125,32 +129,12 @@ def makeRTGForManny(ikr_source, ikr_target):
     for item in noneList:
         rtg_controller.set_source_chain("None", item)
     
-    # not doing this.  Making A pose at skeleton prep time 
-    # # Make a new pose for T_Pose.  I want to import anim seq as pose and name it T_Pose
-    # rtg_controller.create_retarget_pose("T_Pose", unreal.RetargetSourceOrTarget.TARGET)
-    # rtg_controller.set_current_retarget_pose("T_Pose", unreal.RetargetSourceOrTarget.TARGET)
-
-    # set foot IK blend to source to 1, blend source weights 0, 0, 1 & extension to 1.01
-    # left_leg_chain_settings = rtg_controller.get_retarget_chain_settings("LeftLeg")
-    # left_leg_chain_settings.ik.blend_to_source = 1
-    # print(left_leg_chain_settings.ik.blend_to_source)
-    # left_leg_chain_settings.ik.blend_to_source_weights = unreal.Vector(0,0,1)
-    # left_leg_chain_settings.ik.extension=1.01
-    # print(left_leg_chain_settings.ik.blend_to_source_weights)
-    # right_leg_chain_settings = rtg_controller.get_retarget_chain_settings("RightLeg")
-    # right_leg_chain_settings.ik.blend_to_source = 1
-    # right_leg_chain_settings.ik.blend_to_source_weights = unreal.Vector(0,0,1)
-    # right_leg_chain_settings.ik.extension=1.01
-
-    # rotate the root bone -90 on the default pose for the TARGET
-    # this is because the Optitrack Motive skeleton is +X fwd
-
+    # Because my source is front X, rotate the target to match
     rotation_offset = unreal.Rotator()
     rotation_offset.yaw = -90
     rtg_controller.set_rotation_offset_for_retarget_pose_bone("root", rotation_offset.quaternion(), unreal.RetargetSourceOrTarget.TARGET)
 
     unreal.EditorAssetLibrary.save_asset(rtg.get_path_name())
-
     return rtg
 
 def fixRTGChainMapping(rtg_asset):
